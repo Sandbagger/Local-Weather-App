@@ -4,6 +4,7 @@ var visitorLocation = {
   latitude: 1};
 
  var weatherPayload = [];
+
 //Return visitor long and lat
 window.onload = function() {
   var startPos;
@@ -16,6 +17,10 @@ window.onload = function() {
     startPos = position;
     visitorLocation.longitude = startPos.coords.longitude;
     visitorLocation.latitude = startPos.coords.latitude;
+    console.log("geosucc");
+    console.log(visitorLocation.longitude);
+    //call weather here because of execution context of this callback
+    callOpenWeather();
   };
   var geoError = function(error) {
     console.log('Error occurred. Error code: ' + error.code);
@@ -27,8 +32,8 @@ window.onload = function() {
   };
 
   navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
-  console.log(visitorLocation.longitude);
-  callOpenWeather();
+  console.log("window onload");
+  
 };
 
 console.log(visitorLocation.longitude);
@@ -45,4 +50,5 @@ xhr.onload = function () {
  else {console.log("error: status is not 200")
       }
  };
+ console.log(visitorLocation.longitude)
 };
