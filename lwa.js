@@ -40,15 +40,31 @@ console.log(visitorLocation.longitude);
 
 //Make weather api call console.log(visitorLocation.longitude);
 function callOpenWeather () {
-var xhr = new XMLHttpRequest();
-xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?lat="+visitorLocation.latitude+"&lon="+visitorLocation.longitude+"&APPID=a81ada84fca5c84e4168cd23c53c30f8", true);
-xhr.send(null)
-xhr.onload = function () {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?lat="+visitorLocation.latitude+"&lon="+visitorLocation.longitude+"&APPID=a81ada84fca5c84e4168cd23c53c30f8", true);
+  xhr.send(null)
+  //Extract weather data from weather payload with icon
+  xhr.onload = function () {
        if (xhr.status === 200) {
-   weatherPayload.push(JSON.parse(xhr.response));
-     }
+    parseResponse = JSON.parse(xhr.response);
+   extractedWeatherData(parseResponse, updateHTML);
+     }  
  else {console.log("error: status is not 200")
       }
  };
  console.log(visitorLocation.longitude)
 };
+
+//Extract weather data from weather payload with icon
+function extractedWeatherData (response, callback) {
+   var temp = response.main.temp;
+   var weatherDescription = response.weather[0].description;
+   var weatherIcon = response.weather[0].icon;
+  callback(temp, weatherDescription, weatherIcon);
+}
+
+function updateHTML(temperature, description, icon ) {
+  document.getElementById("displayTemp").textContent  = temperature;
+  document.getElementById("displayDescription").textContent = description;
+  document.getElementById("displayIcon").textContent = icon;
+} 
