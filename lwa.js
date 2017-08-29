@@ -1,5 +1,5 @@
 
-//Return visitor long and lat
+//Rvisitor long and lat
 window.onload = function() {
  
   var geoOptions = {
@@ -30,7 +30,7 @@ function callOpenWeather(longitude, latitude) {
   //modify URL with coordinates
   xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&APPID=a81ada84fca5c84e4168cd23c53c30f8", true);
   xhr.send(null);
-  //Extract weather data from weather payload with icon
+  //Extract weather data from weather payload
   xhr.onload = function () {
        if (xhr.status === 200) {
     parseResponse = JSON.parse(xhr.response);
@@ -39,7 +39,6 @@ function callOpenWeather(longitude, latitude) {
  else {console.log("error: status is not 200")
       }
  };
- console.log(visitorLocation.longitude)
 };
 
 //Extract weather data from weather payload with icon
@@ -48,6 +47,7 @@ function extractedWeatherData (response, callback) {
    var weatherDescription = response.weather[0].description;
    var weatherIcon = response.weather[0].icon;
   callback(temp, weatherDescription, weatherIcon);
+  updateIconURL(weatherIcon);
 }
 
 function updateHTML(temperature, description, icon ) {
@@ -55,3 +55,10 @@ function updateHTML(temperature, description, icon ) {
   document.getElementById("displayDescription").textContent = description;
   document.getElementById("displayIcon").textContent = icon;
 } 
+
+function updateIconURL(icon) {
+  url = "http://openweathermap.org/img/w/"+icon+".png";
+   var image = document.getElementById("imageIcon");
+   image.src = url;
+}
+
