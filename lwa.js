@@ -9,6 +9,9 @@ window.onload = function() {
   var geoSuccess = function(position) {
    var long = position.coords.longitude;
    var lat = position.coords.latitude;
+   console.log("longitude " + long);
+   console.log("latitude " + lat);
+
    //pass coordinates to weather API
     callOpenWeather(long, lat);
   };
