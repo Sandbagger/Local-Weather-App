@@ -1,6 +1,12 @@
+var addListenerToButton = function(){
+  var getPermission = document.getElementById("permission");
+getPermission.addEventListener("click", visitorLocation);
+}
 
-//Rvisitor long and lat
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', addListenerToButton);
+
+//visitor long and lat
+var visitorLocation = function() {
  
   var geoOptions = {
      timeout: 10 * 1000
@@ -58,11 +64,11 @@ function extractedWeatherData (response, callback) {
 function updateHTML(temperature, description, icon, city, country) {
   document.getElementById("displayTemp").textContent  = Math.round(temperature);
   document.getElementById("displayDescription").textContent = description;
-  document.getElementById("displayIcon").textContent = icon;
-  document.getElementById("city").textContent = city;
-  document.getElementById("country").textContent = country;
-  var button = document.getElementById("converter");
+  document.getElementById("title").textContent = city + ", " + country;
+  var button = document.getElementById("displayTemp");
 button.addEventListener("click", add);
+reveal();
+
 } 
 
 function updateIconURL(icon) {
@@ -93,3 +99,12 @@ document.getElementById("displayTemp").innerText = celsiusRounded;
  document.getElementById("unit").innerText = "°C";
  }
 }
+
+//reveal div containing weatehr data 
+function reveal() {
+var data = document.getElementById("reveal");
+var getPermission = document.getElementById("permission");
+data.style.display = "flex";
+getPermission.style.display = "none";
+}
+

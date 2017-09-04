@@ -3,11 +3,26 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
+span{
+  font-family: 'Lato', sans-serif;
+}
+
 h2 {
   color: white;
 }
 
-#city {
+header {
+  margin-bottom: 5%;
+}
+
+
+p{
+color: white;
+padding-left: 15%;
+font-family: 'Lato', sans-serif;
+}
+
+  #city {
   margin-right: 3%;
 }
 
@@ -51,17 +66,57 @@ color: #FFDE00;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 33%;
+  width: 75%;
+  margin-bottom: 20%;
 }
 
 .tempContainer {
   display: flex;
   flex-direction: row;
+  width:75%;
+  justify-content: space-between;
  
 
 }
 
 .iconContainer {
+  border-right: 5px solid white;
+  padding-right: 25%;
+  margin-right: 15%;
+}
+
+#reveal {
+  display: none;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-left: 10%
+
+}
+
+button {
+  height: 50px;
+  width: 50px;
+  background-color: white;
   display: flex;
-  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 1em;
+  transition: background-color 0.5s ease;
+  border-radius: 50%;
+}
+
+.fa-thermometer-empty {
+  color: white;
+}
+
+i {
+  color: black;
+}
+
+#verticalLine {
+  border-left: 5px solid white;
+}
+
+#crosshairs {
+  color: black;
 }
