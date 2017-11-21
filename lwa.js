@@ -1,110 +1,135 @@
-var addListenerToButton = function(){
-  var getPermission = document.getElementById("permission");
-getPermission.addEventListener("click", visitorLocation);
-}
-
-document.addEventListener('DOMContentLoaded', addListenerToButton);
-
-//visitor long and lat
-var visitorLocation = function() {
- 
-  var geoOptions = {
-     timeout: 10 * 1000
-  }
-
-  var geoSuccess = function(position) {
-   var long = position.coords.longitude;
-   var lat = position.coords.latitude;
-   console.log("longitude " + long);
-   console.log("latitude " + lat);
-
-   //pass coordinates to weather API
-    callOpenWeather(long, lat);
-  };
-  var geoError = function(error) {
-    console.log('Error occurred. Error code: ' + error.code);
-    // error.code can be:
-    //   0: unknown error
-    //   1: permission denied
-    //   2: position unavailable (error response from location provider)
-    //   3: timed out
-  };
-  //must go after callback definitions due to hoisting
-  navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
-  
-};
-
-function callOpenWeather(longitude, latitude) {
-  var xhr = new XMLHttpRequest();
-  //modify URL with coordinates
-  xhr.open("GET", "https://api.openweathermap.org/data/2.5/weather?lat="+latitude+"&lon="+longitude+"&units=imperial&APPID=a81ada84fca5c84e4168cd23c53c30f8", true);
-  xhr.send(null);
-  //Extract weather data from weather payload
-  xhr.onload = function () {
-       if (xhr.status === 200) {
-    parseResponse = JSON.parse(xhr.response);
-   extractedWeatherData(parseResponse, updateHTML);
-     }  
- else {console.log("error: status is not 200")
-      }
- };
-};
-
-//Extract weather data from weather payload with icon
-function extractedWeatherData (response, callback) {
-   var temp = response.main.temp;
-   var weatherDescription = response.weather[0].description;
-   var weatherIcon = response.weather[0].icon;
-   var city = response.name;
-   var country = response.sys.country;
-  callback(temp, weatherDescription, weatherIcon, city, country);
-  updateIconURL(weatherIcon);
-}
-
-function updateHTML(temperature, description, icon, city, country) {
-  document.getElementById("displayTemp").textContent  = Math.round(temperature);
-  document.getElementById("displayDescription").textContent = description;
-  document.getElementById("title").textContent = city + ", " + country;
-  var button = document.getElementById("displayTemp");
-button.addEventListener("click", add);
-reveal();
-
-} 
-
-function updateIconURL(icon) {
-  url = "http://openweathermap.org/img/w/"+icon+".png";
-   var image = document.getElementById("imageIcon");
-   image.src = url;
-}
-
+//AIzaSyBtskwqZzUziYgldehwnvRtTFVejNAnX3w Google place API
 var add = (function () {
     var counter = 0;
     return function () {counter += 1;
               unitConversion(counter)  }
 })();
 
+document.addEventListener('DOMContentLoaded', visitorLocation);
+document.addEventListener('DOMContentLoaded', function(){document.getElementsByClassName("temp")[0].addEventListener("click", add)})
+
+
 
 function unitConversion(counter){
-  var temp = +document.getElementById("displayTemp").innerText;
+  var temp = +document.getElementsByClassName("temp")[0].innerText;
   if (counter % 2 === 0) {
     var fahr = (temp * (9/5)) + 32; 
     var fahrRounded = Math.round(fahr);
-document.getElementById("displayTemp").innerText = fahrRounded;
-document.getElementById("unit").innerText = "°F";
+document.getElementsByClassName("temp")[0].innerText = fahrRounded;
+document.getElementsByClassName("units")[0].innerText = "°F";
   }
   else {
     var celsius = (temp - 32) / 1.8;
 var celsiusRounded = Math.round(celsius);
-document.getElementById("displayTemp").innerText = celsiusRounded;
- document.getElementById("unit").innerText = "°C";
+document.getElementsByClassName("temp")[0].innerText = celsiusRounded;
+ document.getElementsByClassName("units")[0].innerText = "°C";
  }
 }
 
-//reveal div containing weatehr data 
-function reveal() {
-var data = document.getElementById("reveal");
-var getPermission = document.getElementById("permission");
-data.style.display = "flex";
-getPermission.style.display = "none";
+
+
+
+function visitorLocation() {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log(position);
+      resolve([position.coords.latitude, position.coords.longitude]);
+    });
+  });
 }
+
+visitorLocation().then(function(arr){
+  var lat = arr[0];
+  var lon = arr[1];
+return Promise.all([
+    fetch("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lon+"&key=AIzaSyDBrYh7woujepVOlKbmHs5hoIhhO4OjMGM").then(function(data){
+      return(data.json())
+      .then(function (resp){
+        console.log(resp);
+        var city = resp.results[0].address_components[3].long_name;
+        var country = resp.results[0].address_components[5].short_name;
+        updatelocation(city, country);
+        console.log(city);
+        console.log(country);
+        })
+    }),
+
+    fetch("https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/d0593cabe425939edd51e1834e35f403/"+lat+","+lon).then(function(resp){
+      return resp.json()
+    }).then(function(data){
+        var icon = data.currently.icon;
+        var temp = Math.round(data.currently.temperature);
+        updateIcon(icon);
+        updateTemp(temp);
+        console.log(data)
+        })
+    
+]);
+    })
+
+
+
+function updateIcon(weather){
+  var iconSelector = document.getElementsByTagName("canvas")[0];
+  iconSelector.setAttribute("id", weather);
+
+  var icon = new Skycons({"color": "pink",
+                              "resizeClear": true}) 
+  var iconArr = [ 
+     {weather: "clear-day",
+     func:function(){return icon.set("clear-day", Skycons.CLEAR_DAY)}
+    },
+     {weather: "clear-night",
+      func: function(){return icon.set("clear-night", Skycons.CLEAR_NIGHT)}
+      },
+     {weather: "partly-cloudy-day",
+     func: function(){return  icon.set("partly-cloudy-day", Skycons.PARTLY_CLOUDY_DAY)}
+    },
+     {weather: "partly-cloudy-night",
+      func: function(){return icon.set("partly-cloudy-night", Skycons.PARTLY_CLOUDY_NIGHT)}
+      },
+     {weather: "cloudy",
+      func: function(){return icon.set("cloudy", Skycons.CLOUDY)}
+      },
+     {weather: "rain",
+      func: function(){return  icon.set("rain", Skycons.RAIN)}
+      },
+     {weather: "sleet",
+      func: function(){return  icon.set("sleet", Skycons.SLEET)}
+      },
+     {weather: "snow",
+      func: function(){return  icon.set("snow", Skycons.SNOW)}
+      },
+     {weather: "wind",
+      func: function(){return  icon.set("wind", Skycons.WIND)}
+      },
+     {weather: "fog",
+      func: function(){return icon.set("fog", Skycons.FOG)}
+      }
+      ];
+
+    var deploy = iconArr.find(function(ob){
+      if (ob.weather === weather) {
+          return ob.func();
+        }
+      })
+
+      icon.play();
+  
+}
+
+function updateTemp(t){
+  var temp = document.getElementsByClassName("temp")[0].textContent = t;
+}
+
+function updatelocation(city, country){
+  document.getElementsByClassName("city")[0].textContent = city;
+  document .getElementsByClassName("country")[0].textContent = country;
+}
+
+
+
+
+
+
 

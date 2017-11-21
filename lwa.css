@@ -1,122 +1,105 @@
-body {
-	background-color: #4ABDAC;
-	font-family: 'Lato', sans-serif;
-}
 
-span{
+body {
+  background-color: white;
   font-family: 'Lato', sans-serif;
 }
 
-h2 {
-  color: white;
-}
-
-header {
-  margin-bottom: 5%;
-}
-
-
-p{
-color: white;
-padding-left: 15%;
-font-family: 'Lato', sans-serif;
-}
-
-  #city {
-  margin-right: 3%;
-}
-
-#title {
-font-size: 3rem;
-color: #FFDE00;
-}
 
 .container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 
 }
 
-.lwa {
+.wv {
   display: flex;
   align-items: center;
   min-height: 24em;
   justify-content: center;
   flex-direction: column;
-  width: 70%;
+  width: 50%;
   height: 80%;
   border: 5px solid white;
   border-radius: 15px;
-  overflow: scroll;
-  overflow-y: auto;
-  overflow-x: auto;
+
+  background-color: #4ABDAC;
 }
 
-.location {
-  display: flex;
-  flex-direction: row; 
-  margin
+
+#title {
+font-size: 3rem;
+margin: auto;
+color: black;
+margin-top: 10%;
+margin-bottom: 3%
+
 }
 
-.weatherInfo {
+span{
+  color: white;
+  font-size: 1em;
+  font-weight:  bold;
+}
+
+.subcontainer{
+  display: flex;    
+  flex-direction:  column;  
+  width: 100%;
+  justify-content:  center; 
+  align-items:  center;
+  margin-bottom: 15%;
+}
+
+
+.temp-location{
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 75%;
-  margin-bottom: 20%;
+  height: 80%;
+  justify-content:  center; 
+  align-items:  center;
+  margin-bottom: 3%;
 }
 
-.tempContainer {
+.location{
   display: flex;
-  flex-direction: row;
-  width:75%;
-  justify-content: space-between;
- 
+  flex-direction:  column; 
+  width: 50%;
+  height: 80%;
+  justify-content:  center; 
+  border-left: 1px solid white;
+  padding-left:  3%; 
+  }
 
+.weather-info{
+  display:  flex; 
+  flex-direction:   row;
+  height: 80%;
+  padding-right: 5%;
 }
 
-.iconContainer {
-  border-right: 5px solid white;
-  padding-right: 25%;
-  margin-right: 15%;
-}
 
-#reveal {
-  display: none;
-  justify-content: space-between;
-  flex-direction: column;
-  margin-left: 10%
-
-}
-
-button {
-  height: 50px;
-  width: 50px;
-  background-color: white;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 1em;
-  transition: background-color 0.5s ease;
-  border-radius: 50%;
-}
-
-.fa-thermometer-empty {
+.temp{
+  font-size:  7em;
+  font-weight:  bold; 
   color: white;
 }
 
-i {
-  color: black;
+.temp-data{
+  display:  flex;
+  flex-direction:   row;
+  justify-content:  center; 
+  align-items:  center; 
+  
+  height: 4em;
+  padding-right: 3%;
 }
 
-#verticalLine {
-  border-left: 5px solid white;
-}
-
-#crosshairs {
-  color: black;
+.units{
+   font-size:  2em;
+  font-weight:  bold; 
+  color: white;
+  margin-top: 7%;
 }

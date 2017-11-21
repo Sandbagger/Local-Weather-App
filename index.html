@@ -1,35 +1,45 @@
+
 <!DOCTYPE html>
+
 <html>
 <head>
-<script type="text/javascript" src="lwa.js"></script>
-<script src="https://use.fontawesome.com/02b956c77d.js"></script>
-<link rel="stylesheet" type="text/css" href="lwa.css">
-	<title>Local Weather App</title>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="lwa.css">
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script type="text/javascript" src="lwa.js"></script>
+  <script type="text/javascript" src="https://darkskyapp.github.io/skycons/skycons.js"></script>
+
 </head>
 <body>
-	<div class="container"> 
-		<div class="lwa">
-			<header id="title">Local Weather App</header>
-			
-			<button id="permission"><i class="fa fa-crosshairs fa-3x" id="crosshairs" aria-hidden="true"></i></button>
+		<div class="container"> 
+				<div class="wv">
+					<header id="title"><span></span> Local Weather</span></header>
+					<div class="subcontainer">
+						<div class="temp-location">
+								<div class="weather-info">
+									
+							<canvas id="" width="75" height="75"></canvas>
+					
+								</div>
+								<div class="location">
+									<p><span class="city"></span><br>
+										<span class="country"">	</span></p>
+								</div>
+						</div>
+					
 
-			<div id="reveal">
-				<div class="weatherInfo">
-					<div class="iconContainer">
-					<img src="" id="imageIcon">
-					<div id="verticalLine"></div>
-					<p id="displayDescription">description</p>
-					</div>
-						<div>
-						<i class="fa fa-thermometer-empty fa-2x" aria-hidden="true"><span id="displayTemp">temp</span><span id="unit">°F</span></i>
-					</div>
-					</div>
-			</div>
-			
+						
+					<div class="temp-data">
+										<p class="temp"></p>
+										<p class="units">°F</p>
+									</div>
+				</div>
 		</div>
-	</div>
-</div>
-
 
 </body>
+<script src="https://use.fontawesome.com/02b956c77d.js"></script>
+
+
+
+
 </html>
