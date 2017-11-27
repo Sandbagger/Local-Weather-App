@@ -11,18 +11,31 @@ document.addEventListener('DOMContentLoaded', function(){document.getElementsByC
 
 
 function unitConversion(counter){
-  var temp = +document.getElementsByClassName("temp")[0].innerText;
-  if (counter % 2 === 0) {
+  var temp = +document.getElementsByClassName("temp")[0].innerText
+var altTemp = +document.getElementsByClassName("alt-temp")[0].innerText
+    if (counter % 2 === 0) {
     var fahr = (temp * (9/5)) + 32; 
     var fahrRounded = Math.round(fahr);
 document.getElementsByClassName("temp")[0].innerText = fahrRounded;
 document.getElementsByClassName("units")[0].innerText = "°F";
+
+ var celsius = (altTemp - 32) / 1.8;
+var celsiusRounded = Math.round(celsius);
+document.getElementsByClassName("alt-temp")[0].innerText = celsiusRounded;
+ document.getElementsByClassName("alt-units")[0].innerText = "°C";
+
   }
   else {
     var celsius = (temp - 32) / 1.8;
 var celsiusRounded = Math.round(celsius);
 document.getElementsByClassName("temp")[0].innerText = celsiusRounded;
  document.getElementsByClassName("units")[0].innerText = "°C";
+ 
+ var fahr = (altTemp * (9/5)) + 32; 
+    var fahrRounded = Math.round(fahr);
+document.getElementsByClassName("alt-temp")[0].innerText = fahrRounded;
+document.getElementsByClassName("alt-units")[0].innerText = "°F";
+
  }
 }
 
@@ -47,7 +60,7 @@ return Promise.all([
       .then(function (resp){
         console.log(resp);
         var city = resp.results[0].address_components[3].long_name;
-        var country = resp.results[0].address_components[5].short_name;
+        var country = resp.results[0].address_components[6].short_name;
         updatelocation(city, country);
         console.log(city);
         console.log(country);
@@ -73,7 +86,7 @@ function updateIcon(weather){
   var iconSelector = document.getElementsByTagName("canvas")[0];
   iconSelector.setAttribute("id", weather);
 
-  var icon = new Skycons({"color": "pink",
+  var icon = new Skycons({"color": "white",
                               "resizeClear": true}) 
   var iconArr = [ 
      {weather: "clear-day",
@@ -120,6 +133,8 @@ function updateIcon(weather){
 
 function updateTemp(t){
   var temp = document.getElementsByClassName("temp")[0].textContent = t;
+
+  var altTemp = document.getElementsByClassName("alt-temp")[0].textContent =  Math.round((temp - 32) / 1.8);
 }
 
 function updatelocation(city, country){

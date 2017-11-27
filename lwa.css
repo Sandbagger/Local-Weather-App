@@ -1,16 +1,17 @@
 
 body {
-  background-color: white;
-  font-family: 'Lato', sans-serif;
+	background-color: white;
+	font-family: 'Lato', sans-serif;
 }
 
 
 .container {
-  display: flex;
+	display: flex;
+	justify-content: center;
+	align-items: center;
   justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
+	height: 100%;
+	width: 100%;
 
 }
 
@@ -30,7 +31,7 @@ body {
 
 
 #title {
-font-size: 3rem;
+font-size: 2rem;
 margin: auto;
 color: black;
 margin-top: 10%;
@@ -39,7 +40,7 @@ margin-bottom: 3%
 }
 
 span{
-  color: white;
+	color: white;
   font-size: 1em;
   font-weight:  bold;
 }
@@ -87,19 +88,59 @@ span{
   color: white;
 }
 
+.alt-temp{
+  font-size:  2em;
+  font-weight:  bold; 
+  color: #E5E5E5;
+  margin-top: 25%;
+}
+
 .temp-data{
   display:  flex;
   flex-direction:   row;
   justify-content:  center; 
   align-items:  center; 
+  padding-bottom:   5%;
   
   height: 4em;
   padding-right: 3%;
 }
 
 .units{
-   font-size:  2em;
+   font-size:  2.5em;
   font-weight:  bold; 
   color: white;
   margin-top: 7%;
+}
+
+.alt-units{
+  font-size:  1em;
+  font-weight:  bold; 
+  color: #E5E5E5;
+  margin-bottom:  15%;
+}
+
+.unit-container{
+  display:  flex; 
+  flex-direction:  column;  
+}
+
+.alt-temp-data{
+  display:  flex; 
+  flex-direction:   row;
+  align-items: flex-start;
+  justify-content:  center; 
+  height: 5%;
+
+}
+
+.hr{
+  border-top: 1px solid white;
+  width: 30%;
+  margin-top: 4%;
+}
+
+#country{
+  color: #E5E5E5;
+  font-size: 0.8em;
 }
