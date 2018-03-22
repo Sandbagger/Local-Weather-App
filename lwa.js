@@ -6,7 +6,7 @@ var add = (function () {
 })();
 
 document.addEventListener('DOMContentLoaded', visitorLocation);
-document.addEventListener('DOMContentLoaded', function(){document.getElementsByClassName("temp")[0].addEventListener("click", add)})
+document.addEventListener('DOMContentLoaded', function(){document.getElementsByClassName("weather-info")[0].addEventListener("click", add)})
 
 
 
@@ -72,9 +72,11 @@ return Promise.all([
     }).then(function(data){
         var icon = data.currently.icon;
         var temp = Math.round(data.currently.temperature);
+        var sum = data.currently.summary;
+          console.log(sum);
         updateIcon(icon);
         updateTemp(temp);
-        console.log(data)
+        updateSummary(sum);
         })
     
 ]);
@@ -86,7 +88,7 @@ function updateIcon(weather){
   var iconSelector = document.getElementsByTagName("canvas")[0];
   iconSelector.setAttribute("id", weather);
 
-  var icon = new Skycons({"color": "white",
+  var icon = new Skycons({"color": "black",
                               "resizeClear": true}) 
   var iconArr = [ 
      {weather: "clear-day",
@@ -142,6 +144,9 @@ function updatelocation(city, country){
   document .getElementsByClassName("country")[0].textContent = country;
 }
 
+function updateSummary(sum){
+  document.getElementsByClassName("summary")[0].textContent  = sum;
+}
 
 
 

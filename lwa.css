@@ -49,6 +49,7 @@ span{
   display: flex;    
   flex-direction:  column;  
   width: 100%;
+  height:   50%;
   justify-content:  center; 
   align-items:  center;
   margin-bottom: 15%;
@@ -71,21 +72,22 @@ span{
   height: 80%;
   justify-content:  center; 
   border-left: 1px solid white;
-  padding-left:  3%; 
+  padding-left:  5%; 
   }
 
 .weather-info{
   display:  flex; 
-  flex-direction:   row;
+  flex-direction:   column;
+  justify-content:  center; 
+  align-items:  center; 
   height: 80%;
-  padding-right: 5%;
 }
 
 
 .temp{
-  font-size:  7em;
+  font-size:  1em;
   font-weight:  bold; 
-  color: white;
+  color: black;
 }
 
 .alt-temp{
@@ -100,17 +102,17 @@ span{
   flex-direction:   row;
   justify-content:  center; 
   align-items:  center; 
-  padding-bottom:   5%;
-  
-  height: 4em;
+  background-color: white;
+  padding-left: 3%;
   padding-right: 3%;
+  border-radius: 15%;
+  margin-right: 5%;
 }
 
 .units{
-   font-size:  2.5em;
+   font-size:  1em;
   font-weight:  bold; 
-  color: white;
-  margin-top: 7%;
+  color: black;
 }
 
 .alt-units{
