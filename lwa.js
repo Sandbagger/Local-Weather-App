@@ -10,60 +10,23 @@ document.addEventListener('DOMContentLoaded', function(){document.getElementsByC
 
 
 
-function unitConversion(counter){
-  var temp = +document.getElementsByClassName("temp")[0].innerText
-var altTemp = +document.getElementsByClassName("alt-temp")[0].innerText
-    if (counter % 2 === 0) {
-    var fahr = (temp * (9/5)) + 32; 
-    var fahrRounded = Math.round(fahr);
-document.getElementsByClassName("temp")[0].innerText = fahrRounded;
-document.getElementsByClassName("units")[0].innerText = "°F";
-
- var celsius = (altTemp - 32) / 1.8;
-var celsiusRounded = Math.round(celsius);
-document.getElementsByClassName("alt-temp")[0].innerText = celsiusRounded;
- document.getElementsByClassName("alt-units")[0].innerText = "°C";
-
-  }
-  else {
-    var celsius = (temp - 32) / 1.8;
-var celsiusRounded = Math.round(celsius);
-document.getElementsByClassName("temp")[0].innerText = celsiusRounded;
- document.getElementsByClassName("units")[0].innerText = "°C";
- 
- var fahr = (altTemp * (9/5)) + 32; 
-    var fahrRounded = Math.round(fahr);
-document.getElementsByClassName("alt-temp")[0].innerText = fahrRounded;
-document.getElementsByClassName("alt-units")[0].innerText = "°F";
-
- }
-}
-
-
-
-
 function visitorLocation() {
   return new Promise(function (resolve, reject) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      console.log(position);
-      resolve([position.coords.latitude, position.coords.longitude]);
-    });
+    navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 }
 
-visitorLocation().then(function(arr){
-  var lat = arr[0];
-  var lon = arr[1];
+visitorLocation().then(function(position){
+  var lat = position.coords.latitude;
+  var lon = position.coords.longitude;
 return Promise.all([
-    fetch("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lon+"&key=AIzaSyDBrYh7woujepVOlKbmHs5hoIhhO4OjMGM").then(function(data){
+    fetch("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lon+"&key=AIzaSyDBrYh7woujepVOlKbmHs5hoIhhO4OjMGM")
+    .then(function(data){
       return(data.json())
       .then(function (resp){
-        console.log(resp);
         var city = resp.results[0].address_components[3].long_name;
         var country = resp.results[0].address_components[6].short_name;
         updatelocation(city, country);
-        console.log(city);
-        console.log(country);
         })
     }),
 
@@ -79,10 +42,11 @@ return Promise.all([
         updateSummary(sum);
         })
     
-]);
+])
     })
-
-
+  .catch(function(err) {
+    console.error(err.message);
+  });
 
 function updateIcon(weather){
   var iconSelector = document.getElementsByTagName("canvas")[0];
@@ -148,6 +112,34 @@ function updateSummary(sum){
   document.getElementsByClassName("summary")[0].textContent  = sum;
 }
 
+function unitConversion(counter){
+  var temp = +document.getElementsByClassName("temp")[0].innerText
+var altTemp = +document.getElementsByClassName("alt-temp")[0].innerText
+    if (counter % 2 === 0) {
+    var fahr = (temp * (9/5)) + 32; 
+    var fahrRounded = Math.round(fahr);
+document.getElementsByClassName("temp")[0].innerText = fahrRounded;
+document.getElementsByClassName("units")[0].innerHTML = "&degF";
+
+ var celsius = (altTemp - 32) / 1.8;
+var celsiusRounded = Math.round(celsius);
+document.getElementsByClassName("alt-temp")[0].innerText = celsiusRounded;
+ document.getElementsByClassName("alt-units")[0].innnerHTML = "&degC";
+
+  }
+  else {
+    var celsius = (temp - 32) / 1.8;
+var celsiusRounded = Math.round(celsius);
+document.getElementsByClassName("temp")[0].innerText = celsiusRounded;
+ document.getElementsByClassName("units")[0].innnerHTML = "&degC";
+ 
+ var fahr = (altTemp * (9/5)) + 32; 
+    var fahrRounded = Math.round(fahr);
+document.getElementsByClassName("alt-temp")[0].innerText = fahrRounded;
+document.getElementsByClassName("alt-units")[0].innnerHTML = "&degF";
+
+ }
+}
 
 
 
