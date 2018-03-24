@@ -30,7 +30,7 @@ canvas {
   height: 80%;
   border: 5px solid white;
   border-radius: 15px;
-
+  padding-bottom: 5%;
   background-color: #4ABDAC;
 }
 
@@ -57,7 +57,7 @@ span{
   height:   50%;
   justify-content:  center; 
   align-items:  center;
-  margin-bottom: 15%;
+  margin-bottom: 5%;
 }
 
 

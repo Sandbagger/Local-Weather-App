@@ -3,34 +3,37 @@
 
 <html>
 <head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>
 	<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 	<title>Local Weather</title>
 	<link rel="stylesheet" type="text/css" href="lwa.css">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <script type="text/javascript" src="lwa.js"></script>
   <script type="text/javascript" src="https://darkskyapp.github.io/skycons/skycons.js"></script>
-  
+  <script src="https://use.fontawesome.com/02b956c77d.js"></script>
+
   
 
 </head>
 <body>
 		<div class="container"> 
 				<div class="wv">
-					<header id="title"><span></span></span></header>
+					<header id="title"><span></span></header>
 					<div class="subcontainer">
 						<div class="temp-location">
 							<div class="temp-data">
 										<p class="temp"></p>
 										
-										<p class="units">&degF</p>
+										<p class="units">&deg;F</p>
 									
-				</div>
+							</div>
 								<div class="location">
 									<p><span class="city"></span><br>
 										<span class="country" id="country">	</span></p>
 								</div>
 						</div>
-					
+					</div>
 
 						
 				
@@ -48,12 +51,13 @@
 				<div class="alt-temp-data">
 						<p class="alt-temp"></p>
 
-						<p class="alt-units">&degC</p>
+						<p class="alt-units">&deg;C</p>
 
 		</div>
-
+</div>
+</div>
 </body>
-<script src="https://use.fontawesome.com/02b956c77d.js"></script>
+
 
 
 
