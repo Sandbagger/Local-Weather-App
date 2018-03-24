@@ -4,6 +4,11 @@ body {
 	font-family: 'Lato', sans-serif;
 }
 
+canvas {
+  background: white;
+  border-radius: 15%;
+  padding: 3% 3% 3% 3%;
+}
 
 .container {
 	display: flex;
@@ -41,7 +46,7 @@ margin-bottom: 3%
 
 span{
 	color: white;
-  font-size: 1em;
+  font-size: 2em;
   font-weight:  bold;
 }
 
@@ -85,7 +90,7 @@ span{
 
 
 .temp{
-  font-size:  1em;
+  font-size:  1.5em;
   font-weight:  bold; 
   color: black;
 }
@@ -107,6 +112,7 @@ span{
   padding-right: 3%;
   border-radius: 15%;
   margin-right: 5%;
+  width: 3em;
 }
 
 .units{
@@ -132,7 +138,7 @@ span{
   flex-direction:   row;
   align-items: flex-start;
   justify-content:  center; 
-  height: 5%;
+  height: 3em;
 
 }
 
@@ -144,5 +150,15 @@ span{
 
 #country{
   color: #E5E5E5;
-  font-size: 0.8em;
+  font-size: 1em;
 }
+
+.summary {
+  font-size: 1em;
+  font-weight: bold;
+  color: black;
+  background: white;
+  padding: 3% 3% 3% 3%;
+  border-radius: 5%;
+  justify-content: center;
+} 
