@@ -11,21 +11,24 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <script type="text/javascript" src="lwa.js"></script>
   <script type="text/javascript" src="https://darkskyapp.github.io/skycons/skycons.js"></script>
-  <script src="https://use.fontawesome.com/02b956c77d.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
 
   
 
 </head>
 <body>
-		<div class="container"> 
-				<div class="wv">
-					<header id="title"><span></span></header>
+
+
+<div class="container"> 
+	
+				<div class="app">
+					
 					<div class="subcontainer">
 						<div class="temp-location">
 							<div class="temp-data">
-										<p class="temp"></p>
+										<span class="temp"></span>
 										
-										<p class="units">&deg;F</p>
+										<span class="units">&deg;F</span>
 									
 							</div>
 								<div class="location">
@@ -34,28 +37,29 @@
 								</div>
 						</div>
 					</div>
-
 						
-				
 									<div class="weather-info">
-									
-							<canvas id="" width="150" height="150"></canvas>
-							<p class="summary"></p>
+										<canvas id="" width="300" height="300"></canvas>
+									<span class="summary"></span>
 					
 								</div>
 										
 											
 									
 				
-				<div class="hr"></div>
-				<div class="alt-temp-data">
-						<p class="alt-temp"></p>
-
-						<p class="alt-units">&deg;C</p>
+				
+				<div class="toggle">
+					<span>&deg;F</span>
+						<label class="switch">
+  						<input type="checkbox" name="checkbox">
+  						<span class="slider round"></span>
+						</label>
+					<span>&deg;C</span>
 
 		</div>
 </div>
-</div>
+</div> 
+
 </body>
 
 
