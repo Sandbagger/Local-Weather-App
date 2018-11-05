@@ -28,21 +28,23 @@ document.querySelector('.temp-data .units').innerHTML = "&degF";
 
 
 var getLocation = function() {
-  console.log("visitor location");
+  //console.log("visitor location");
   return new Promise(function (resolve, reject) {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 }
 
 getLocation().then(function(position){
-   console.log("visitor location then");
+  // console.log("visitor location then");
+   debugger
   var lat = position.coords.latitude;
   var lon = position.coords.longitude;
 return Promise.all([
-    fetch("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lon+"&key=AIzaSyDBrYh7woujepVOlKbmHs5hoIhhO4OjMGM")
+    fetch("https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lon+"&result_type=street_address&key=AIzaSyDBrYh7woujepVOlKbmHs5hoIhhO4OjMGM")
     .then(function(data){
       return(data.json())
       .then(function (resp){
+      //  console.log(resp)
         var city = resp.results[0].address_components[3].long_name;
         var country = resp.results[0].address_components[6].short_name;
         updatelocation(city, country);
@@ -55,7 +57,7 @@ return Promise.all([
         var icon = data.currently.icon;
         var temp = Math.round(data.currently.temperature);
         var sum = data.currently.summary;
-          console.log(sum);
+         // console.log(sum);
         updateIcon(icon);
         updateTemp(temp);
         updateSummary(sum);
@@ -136,36 +138,6 @@ function updatelocation(city, country){
 function updateSummary(sum){
   document.getElementsByClassName("summary")[0].textContent  = sum;
 }
-
-// function unitConversion(counter){
-//   var temp = +document.getElementsByClassName("temp")[0].innerText
-// var altTemp = +document.getElementsByClassName("alt-temp")[0].innerText
-//     if (counter % 2 === 0) {
-//     var fahr = (temp * (9/5)) + 32; 
-//     var fahrRounded = Math.round(fahr);
-// document.getElementsByClassName("temp")[0].innerText = fahrRounded;
-// document.getElementsByClassName("units")[0].innerHTML = "&degF";
-
-//  var celsius = (altTemp - 32) / 1.8;
-// var celsiusRounded = Math.round(celsius);
-// document.getElementsByClassName("alt-temp")[0].innerText = celsiusRounded;
-//  document.getElementsByClassName("alt-units")[0].innnerHTML = "&degC";
-
-//   }
-//   else {
-//     var celsius = (temp - 32) / 1.8;
-// var celsiusRounded = Math.round(celsius);
-// document.getElementsByClassName("temp")[0].innerText = celsiusRounded;
-//  document.getElementsByClassName("units")[0].innnerHTML = "&degC";
- 
-//  var fahr = (altTemp * (9/5)) + 32; 
-//     var fahrRounded = Math.round(fahr);
-// document.getElementsByClassName("alt-temp")[0].innerText = fahrRounded;
-// document.getElementsByClassName("alt-units")[0].innnerHTML = "&degF";
-
-//  }
-// }
-
 
 
 
